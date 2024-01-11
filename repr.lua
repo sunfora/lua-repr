@@ -65,7 +65,16 @@ local represent = {
     string = {},
     config = {
         string = {
-            style = [["%s"]]
+            style = [["%s"]],
+			escapes = {
+	            ['\a'] = '\\a',
+                ['\b'] = '\\b',
+                ['\f'] = '\\f',
+                ['\n'] = '\\n',
+                ['\r'] = '\\r',
+                ['\t'] = '\\t',
+                ['\v'] = '\\v'
+            }
         },
         table = {
             show_address = false,
@@ -114,9 +123,12 @@ local function repr(object, config)
 end
 
 --
--- represents a string with quotes
+-- represents string with quotes
 --
 function represent.string.as(str, config, repr)
+	for k, v in pairs(config.escapes) do
+		str = str:gsub(k, v)
+	end
     return string.format(config.style, str)
 end
 

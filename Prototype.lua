@@ -1,10 +1,10 @@
-local Prototype = {}
+local prototype = {}
 
 --
 -- Checks whether the table has prototype in its prototype-chain
 --
-local function Prototype.instanceof (table, prototype)
-    assert(type(table) == 'table', 'instanceof of type ' .. type(table))
+function prototype.instanceof (table, prototype)
+    assert(type(table) == 'table', 'instanceof of type ' .. type(table) .. ' not supported')
     while table do
         if table == prototype then 
             return true
@@ -15,3 +15,4 @@ local function Prototype.instanceof (table, prototype)
     return false
 end
 
+return prototype
